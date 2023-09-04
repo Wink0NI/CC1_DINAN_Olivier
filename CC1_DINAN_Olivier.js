@@ -11,7 +11,22 @@ const $maxUsr = document.getElementById("max-usr");
 // définir le mode de fonctionnement de la vache + style du boutonn
 let $vacher = false;
 const style = document.createElement("style");
-style.innerText = ".green {background-color: green;}";
+style.innerText = `
+.green {
+  background-color: green;
+}
+.cow {
+  transform: translate(-50%, -50%);
+  animation: rotateCow 4s linear infinite;
+}
+@keyframes rotateCow {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}`;
 document.querySelector("head").appendChild(style);
 
 
@@ -107,15 +122,14 @@ $maxUsr.onkeydown = function (event) {
 }
 
 function addCow(evt) {
-  console.log(evt.x, evt.y);
   // TODO : compléter ici
   const cowImage = document.createElement("img");
   cowImage.src = "https://upload.wikimedia.org/wikipedia/commons/3/30/Cowicon.svg";
   cowImage.classList.add("cow");
 
   // Position de la vache au clic de la souris
-  cowImage.style.left = `${evt.x + window.scrollX - 20}px`;
-  cowImage.style.top = `${evt.y + window.scrollY - 25}px`;
+  cowImage.style.left = `${evt.x + window.scrollX }px`;
+  cowImage.style.top = `${evt.y + window.scrollY }px`;
 
   // Rotation random de la vache
   const randomRotation = Math.floor(Math.random() * 360);
